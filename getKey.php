@@ -11,9 +11,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-if (!empty($_POST["firstname"])) {
-    $sql = "INSERT INTO project.person (firstName, lastName, address)
-VALUES ('".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['address']."')";
+if (!empty($_POST["material"])) {
+    $sql = "INSERT INTO project.key (type, material)
+VALUES ('".$_POST['type']."','".$_POST['material']."')";
     if ($conn->query($sql) === TRUE) {
        // echo "New record created successfully";
     } else {
@@ -21,7 +21,7 @@ VALUES ('".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['address'].
     }
 }
 //echo "Connected successfully";
-$sql = "SELECT * FROM project.person";
+$sql = "SELECT * FROM project.key";
 $result = $conn->query($sql);
 ?>
   
@@ -45,13 +45,13 @@ $result = $conn->query($sql);
                 <li >
                     <a href="index.php">Home</a>
                 </li>
-                <li class="selected">
+                <li >
                     <a href="person.php">Person</a>
                 </li>
                 <li>
                     <a href="room.php">Room</a>
                 </li>
-                <li>
+                <li class="selected">
                     <a href="key.php">Key</a>
                 </li>
             </ul>
@@ -59,35 +59,35 @@ $result = $conn->query($sql);
     </div>
     <div id="site_content">
         <div class="sidebar">
-        <h3>Add New Person</h3>
-        <form method="post" action="getPerson.php">
-            First name:<br>
-            <input type="text" name="firstname" value="Mickey" required>
+        <h3>Add New Key</h3>
+        <form method="post" action="getKey.php">
+            Type:<br>
+            <select name="type" required>
+                <option value="master">master</option>
+                <option value="normal">normal</option>
+            </select>
             <br>
-            Last name:<br>
-            <input type="text" name="lastname" value="Mouse" required>
+            Material:<br>
+            <input type="text" name="material" value="Steel" required>
             <br>
-            Address:<br>
-            <textarea name="address" required>800 DR</textarea>
             <br>
             <input type="submit" value="Submit">
             </form> 
         </div>
         <div id="content">
-        <h3> Perrsons List</h3>
+        <h3> Keys List</h3>
         <table>
         <tr>
             <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
+            <th>Type</th>
+            <th>Material</th>
         </tr>
         <?php
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
                 
-                echo "<tr><td>" . $row["id"]."</td><td>" . $row["firstName"]."</td><td>" . $row["lastName"]."</td><td>" . $row["address"]."</td></tr>";
+                echo "<tr><td>" . $row["id"]."</td><td>" . $row["type"]."</td><td>" . $row["material"]."</td></tr>";
             }
         } else {
             echo "0 results";

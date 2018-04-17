@@ -20,13 +20,13 @@
                 <li >
                     <a href="index.php">Home</a>
                 </li>
-                <li class="selected">
+                <li >
                     <a href="person.php">Person</a>
                 </li>
                 <li>
                     <a href="room.php">Room</a>
                 </li>
-                <li>
+                <li class="selected">
                     <a href="key.php">Key</a>
                 </li>
             </ul>
@@ -34,21 +34,25 @@
     </div>
     <div id="site_content">
         <div class="sidebar">
-            <h3>Add New Person</h3>
-        <form method="post" action="getPerson.php">
-            First name:<br>
-            <input type="text" name="firstname" value="Mickey" required>
+        <h3>Add New Key</h3>
+        <form method="post" action="getKey.php">
+            Type:<br>
+            <select name="type" required>
+                <option value="master">master</option>
+                <option value="normal">normal</option>
+            </select>
             <br>
-            Last name:<br>
-            <input type="text" name="lastname" value="Mouse" required>
-            <br><br>
+            Material:<br>
+            <input type="text" name="material" value="Steel" required>
+            <br>
+            <br>
             <input type="submit" value="Submit">
             </form> 
         </div>
         <div id="content">
 
             <!-- php code goes here -->
-            <a href="getPerson.php">Retrieve data</a>
+            <a href="getKey.php">Retrieve data</a>
         </div>
     </div>
     
